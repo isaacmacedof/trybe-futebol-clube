@@ -649,6 +649,8 @@ Esse projeto é composto de 4 fluxos principais:
 
   - Deve ser uma rota `GET` que receba um `header` com parâmetro `authorization`, onde ficará armazenado o token gerado no login;
 
+  - ⚠️ O token deve ser enviado pelo campo Authorization e conter a seguinte estrutura: "Bearer token" ([Consulte este vídeo no tempo 19:30 com mais detalhes do formato a ser enviado](https://app.betrybe.com/learn/course/5e938f69-6e32-43b3-9685-c936530fd326/live-lectures/421eaf0a-9cc0-44e3-8654-e17987539242/recording/1f862d35-8525-461f-add6-293280ec4f26))
+
   - Será validado na API que não é possível retornar um objeto com o tipo de usuário, sem um token;
 
   - Caso o token não seja informado, deve-se retornar, com um status `401`, a seguinte mensagem:
