@@ -5,4 +5,4 @@ export type Matches = {
   awayTeamId: number,
   awayTeamGoals: number,
   inProgress: boolean
-}
+};
