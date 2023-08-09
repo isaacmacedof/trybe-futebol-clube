@@ -3,19 +3,28 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 
-import { app } from '../app';
+import { App } from '../app';
+import { Response } from 'superagent';
 // import Example from '../database/models/ExampleModel';
 
-import { Response } from 'superagent';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Seu teste', () => {
+describe('Test in "teamRout"', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */
+  let app: App;
+  beforeEach(() => {
+    app = new App();
+  });
+
+  it('Testing a "/" for server open', async function() {
+    const response = await chai.request(app.app).get('/');
+    expect(response.status).to.equal(200);
+  });
 
   // let chaiHttpResponse: Response;
 
@@ -38,8 +47,4 @@ describe('Seu teste', () => {
 
   //   expect(...)
   // });
-
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
-  });
 });
