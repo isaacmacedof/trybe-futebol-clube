@@ -6,3 +6,7 @@ export type Matches = {
   awayTeamGoals: number,
   inProgress: boolean
 };
+
+export type Finished = {
+  message: string,
+};
