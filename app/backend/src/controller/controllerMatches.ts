@@ -29,6 +29,14 @@ class controllerMatches {
     const response = await this.serviceT.updateMatchesFinish(trueId);
     return res.status(200).json(response);
   }
+
+  public async updateMatchesGoals(req: Request, res: Response) {
+    const matchId = req.params.id;
+    const trueId = Number(matchId);
+    const updated = req.body;
+    const response = await this.serviceT.updateMatchesGoals(trueId, updated);
+    return res.status(200).json(response);
+  }
 }
 
 export default controllerMatches;

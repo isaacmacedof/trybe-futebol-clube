@@ -9,5 +9,7 @@ const controllerMatches = new ControllerMatches();
 routM.get('/matches', (req, res) => controllerMatches.getMatches(req, res));
 routM.patch('/matches/:id/finish', validateJWT, (req, res) =>
   controllerMatches.updateMatchesFinish(req, res));
+routM.patch('/matches/:id', validateJWT, (req, res) =>
+  controllerMatches.updateMatchesGoals(req, res));
 
 export default routM;

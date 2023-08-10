@@ -10,3 +10,8 @@ export type Matches = {
 export type Finished = {
   message: string,
 };
+
+export type Goals = {
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+};

@@ -1,6 +1,6 @@
 import MatchesModel from '../database/models/matches.model';
 import TeamsModel from '../database/models/teams.model';
-import { Matches, Finished } from '../types/Matches';
+import { Matches, Finished, Goals } from '../types/Matches';
 
 class serviceMatches {
   private model = MatchesModel;
@@ -29,6 +29,16 @@ class serviceMatches {
 
   public async updateMatchesFinish(id: number): Promise<Finished> {
     await this.model.update({ inProgress: false }, { where: { id } });
+    return { message: 'Finished' };
+  }
+
+  public async updateMatchesGoals(id: number, updated: Goals): Promise<Finished | null> {
+    const { homeTeamGoals, awayTeamGoals } = updated;
+    const thisMatches = await this.model.findByPk(id);
+    if (!thisMatches) return null;
+    await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    thisMatches.awayTeamGoals = awayTeamGoals;
+    thisMatches.homeTeamGoals = homeTeamGoals;
     return { message: 'Finished' };
   }
 }
