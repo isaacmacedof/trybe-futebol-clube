@@ -50,13 +50,14 @@ MatchesModel.init({
   },
 }, {
   sequelize: db,
-  modelName: 'trybeEval',
+  modelName: 'matches',
   timestamps: false,
+  underscored: true,
 });
 
-MatchesModel.belongsTo(MatchesModel, { foreignKey: 'home_team_id', as: 'homeTeam' });
-MatchesModel.belongsTo(MatchesModel, { foreignKey: 'away_team_id' as 'awayTeamId' });
-MatchesModel.hasMany(TeamsModel, { foreignKey: 'home_team_id' as 'homeTeam' });
-MatchesModel.hasMany(TeamsModel, { foreignKey: 'away_team_id' as 'awayTeamId' });
+TeamsModel.hasMany(MatchesModel, { as: 'awayTeam', foreignKey: 'awayTeamId' });
+MatchesModel.belongsTo(TeamsModel, { as: 'awayTeam', foreignKey: 'awayTeamId' });
+TeamsModel.hasMany(MatchesModel, { as: 'homeTeam', foreignKey: 'homeTeamId' });
+MatchesModel.belongsTo(TeamsModel, { as: 'homeTeam', foreignKey: 'homeTeamId' });
 
 export default MatchesModel;

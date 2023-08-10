@@ -17,7 +17,7 @@ class controllerLogin {
     const { authorization } = req.headers;
 
     const response = await this.serviceT.getRole(authorization);
-    if (response === null) return res.status(401).json({ message: 'Invalid User' });
+    if (response === null) return res.status(401).json({ message: 'Token must be a valid token' });
     const { role } = response;
     return res.status(200).json({ role });
   }
