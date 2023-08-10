@@ -1,4 +1,5 @@
 import * as bcrypt from 'bcryptjs';
+import { Role } from '../types/Login';
 import { User } from '../types/User';
 import JWT from '../utils/jwt';
 import UserModel from '../database/models/user.model';
@@ -8,8 +9,6 @@ class serviceLogin {
   private jwt = JWT;
 
   public async login(user: User): Promise<string | null > {
-    console.log(user);
-
     const { email, password } = user;
     const loginU = await this.model.findOne({ where: { email } }) || null;
     if (!loginU) return null;
@@ -17,6 +16,16 @@ class serviceLogin {
     if (!passwordIsTrue) return null;
     const token = this.jwt.hashO({ email: loginU.email, password: loginU.password });
     return token;
+  }
+
+  public async getRole(token: string | undefined): Promise<Role | null> {
+    if (token === undefined) return null;
+    const undecodedToken = this.jwt.verify(token);
+    if (typeof undecodedToken === 'string') return null;
+    const { email } = undecodedToken;
+    const loginR = await this.model.findOne({ where: { email } }) || null;
+    if (!loginR) return null;
+    return { role: loginR.role };
   }
 }
 
