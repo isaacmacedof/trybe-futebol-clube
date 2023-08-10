@@ -8,7 +8,6 @@ import { Response } from 'superagent';
 // import Example from '../database/models/ExampleModel';
 import TeamsModel from '../database/models/teams.model';
 import { teams } from './teamsMock';
-import { before } from 'node:test';
 
 
 chai.use(chaiHttp);
@@ -32,7 +31,7 @@ describe('Test in "teamRout"', () => {
     let chaiHttpResponse: Response;
     
     sinon.stub(TeamsModel, 'findAll').resolves(teams as any);
-    const request = await chai.request(app).get('/teams');
+    const request = await chai.request(app.app).get('/teams');
     const { status } = request;
     expect(status).to.eq(200);
     expect(request.body).to.deep.equal(teams);
