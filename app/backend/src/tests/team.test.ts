@@ -36,6 +36,25 @@ describe('Test in "teamRout"', () => {
     expect(status).to.eq(200);
     expect(request.body).to.deep.equal(teams);
   })
+  it('Testing a "/teams" for get with json', async function () {
+    let chaiHttpResponse: Response;
+    
+    sinon.stub(TeamsModel, 'findByPk').resolves(teams[0] as any);
+    const request = await chai.request(app.app).get('/teams/1');
+    const { status } = request;
+    expect(status).to.eq(200);
+    expect(request.body).to.deep.equal(teams[0]);
+  })
+  it('Testing a "/teams" for get null', async function () {
+    let chaiHttpResponse: Response;
+    
+    sinon.stub(TeamsModel, 'findOne').resolves(null);
+    const request = await chai.request(app.app).get('/teams/1123132');
+    const { status } = request;
+    expect(status).to.eq(404);
+    expect(request.body).to.deep.equal({ message: '"id" not found'});
+  })
+  afterEach(sinon.restore);
 
   // let chaiHttpResponse: Response;
 
