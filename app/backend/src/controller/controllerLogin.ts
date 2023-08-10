@@ -16,7 +16,10 @@ class controllerLogin {
   public async getRole(req: Request, res: Response) {
     const { authorization } = req.headers;
 
-    const response = await this.serviceT.getRole(authorization);
+    if (!authorization) return null;
+    const token = authorization.split(' ')[1];
+
+    const response = await this.serviceT.getRole(token);
     if (response === null) return res.status(401).json({ message: 'Token must be a valid token' });
     const { role } = response;
     return res.status(200).json({ role });

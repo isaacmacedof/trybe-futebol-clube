@@ -10,6 +10,12 @@ class controllerMatches {
     const response = await this.serviceT.getMatches();
     return res.status(200).json(response);
   }
+
+  // public async getMatchesFiltred(req: Request, res: Response) {
+  //   const { inProgress } = req.query;
+  //   const response = await this.serviceT.getMatchesFiltred(inProgress);
+  //   return res.status(200).json(response);
+  // }
 }
 
 export default controllerMatches;

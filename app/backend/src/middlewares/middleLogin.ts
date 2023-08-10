@@ -6,7 +6,6 @@ class loginVali {
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const veriLogin = emailRegex.test(email);
     const veriPassword = password.length > 6;
-    console.log(!veriPassword, !veriLogin);
 
     if (!email || !password) {
       return res.status(400).json({ message: 'All fields must be filled' });
