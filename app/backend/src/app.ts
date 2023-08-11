@@ -33,12 +33,12 @@ class App {
     this.app.use(teamRout);
   }
 
-  private loginRout(): void {
-    this.app.use(loginRout);
-  }
-
   private matchesRout(): void {
     this.app.use(matchesRout);
+  }
+
+  private loginRout(): void {
+    this.app.use(loginRout);
   }
 
   public start(PORT: string | number): void {
