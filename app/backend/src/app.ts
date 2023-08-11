@@ -2,6 +2,7 @@ import * as express from 'express';
 import teamRout from './router/teamRout';
 import loginRout from './router/loginRout';
 import matchesRout from './router/matchesRout';
+import routLeader from './router/LeaderBordRout';
 
 class App {
   public app: express.Express;
@@ -13,6 +14,7 @@ class App {
     this.teamRout();
     this.loginRout();
     this.matchesRout();
+    this.routLeader();
 
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
@@ -39,6 +41,10 @@ class App {
 
   private loginRout(): void {
     this.app.use(loginRout);
+  }
+
+  private routLeader(): void {
+    this.app.use(routLeader);
   }
 
   public start(PORT: string | number): void {
