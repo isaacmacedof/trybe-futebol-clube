@@ -1,6 +1,6 @@
 import MatchesModel from '../database/models/matches.model';
 import TeamsModel from '../database/models/teams.model';
-import { Matches, Finished, Goals } from '../types/Matches';
+import { Matches, Finished, Goals, CreateMatchesType } from '../types/Matches';
 
 class serviceMatches {
   private model = MatchesModel;
@@ -40,6 +40,25 @@ class serviceMatches {
     thisMatches.awayTeamGoals = awayTeamGoals;
     thisMatches.homeTeamGoals = homeTeamGoals;
     return { message: 'Finished' };
+  }
+
+  public async verifyTeams(homeTeam: number, awayTeam: number): Promise<boolean> {
+    const isInDbHome = await this.model.findByPk(homeTeam);
+    const isInDbAway = await this.model.findByPk(awayTeam);
+    const verify = isInDbAway !== null && isInDbHome !== null;
+
+    return verify;
+  }
+
+  public async createMatches(newMatch: CreateMatchesType): Promise<Matches | null> {
+    const { homeTeamId, awayTeamId } = newMatch;
+    const verify = await this.verifyTeams(homeTeamId, awayTeamId);
+    if (!verify) {
+      return null;
+    }
+    const newMatchDb = await this.model.create({ ...newMatch as Matches, inProgress: true });
+    const { dataValues } = newMatchDb;
+    return dataValues;
   }
 }
 

@@ -15,3 +15,10 @@ export type Goals = {
   homeTeamGoals: number,
   awayTeamGoals: number,
 };
+
+export type CreateMatchesType = {
+  homeTeamId: number,
+  awayTeamId: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+};

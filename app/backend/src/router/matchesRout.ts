@@ -11,5 +11,6 @@ routM.patch('/matches/:id/finish', validateJWT, (req, res) =>
   controllerMatches.updateMatchesFinish(req, res));
 routM.patch('/matches/:id', validateJWT, (req, res) =>
   controllerMatches.updateMatchesGoals(req, res));
+routM.post('/matches', validateJWT, (req, res) => controllerMatches.createMatches(req, res));
 
 export default routM;
